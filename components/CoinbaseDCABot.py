@@ -76,5 +76,5 @@ class CoinbaseBot():
         
         ticker_price_details = self.get_ticker_price()
         self._logger.info(f"Buying {self.crypto_token} at {ticker_price_details.get('price')}")
-        # return self.create_buy_order()
-        return "Success"
+        return self.create_buy_order()
+        # return "Success"
