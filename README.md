@@ -18,6 +18,8 @@ optional arguments:
 
 I've set this up in AWS Lambda and it runs once every 5 days, you can do the same with CRON on a server. Just generate API keys for either Binance or CoinbasePro, put them in your .env file and away you go.
 
+How to set it up on AWS Lamnda - https://alexford9296.medium.com/dollar-cost-averaging-bot-for-binance-and-coinbase-pro-6b9be7ca074b
+
 To Do -
 - [ ] Discord message when buy order created to see if it as successful or failed.
 - [ ] (optional) - Pull money from bank account
