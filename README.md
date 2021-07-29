@@ -4,7 +4,7 @@ This is a bot that will create buy orders on Binance and Coinbase Pro with your 
 
 Usage
 ```
-usage: bot.py [-h] [--coinbase] [--binance] [--amount AMOUNT] [--token TOKEN] [--findchatid] [--chatid]
+usage: bot.py [-h] [--coinbase] [--binance] [--amount AMOUNT] [--token TOKEN] [--findchatid] [--chatid CHATID]
 
 Dollar Cost Averaging Bot that works on Coinbase Pro or Binance, this should be run via CRON
 
@@ -15,7 +15,7 @@ optional arguments:
   --amount AMOUNT  The amount you would like to invest e.g 10.00
   --token TOKEN    The token you wish to buy e.g ADA-GBP
   --findchatid     Flag to use to find your chat ID for your bot
-  --chatid         If set, this will cause the bot to send you a message depending on how the trade goes
+  --chatid CHATID  If set, this will cause the bot to send you a message depending on how the trade goes
 ```
 
 I've set this up in AWS Lambda and it runs once every 5 days, you can do the same with CRON on a server. Just generate API keys for either Binance or CoinbasePro, put them in your .env file and away you go.

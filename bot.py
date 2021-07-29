@@ -17,7 +17,7 @@ if __name__ =="__main__":
     parser.add_argument('--amount', action="store", help="The amount you would like to invest e.g 10.00", required=False)
     parser.add_argument('--token', action="store", help="The token you wish to buy e.g ADA-GBP", required=False)
     parser.add_argument('--findchatid', action="store_true", help="Flag to use to find your chat ID for your bot", required=False)
-    parser.add_argument('--chatid', action="store_true", help="If set, this will cause the bot to send you a message depending on how the trade goes", required=False)
+    parser.add_argument('--chatid', action="store", help="If set, this will cause the bot to send you a message depending on how the trade goes", required=False)
     load_dotenv()
     args = parser.parse_args()
     if args.findchatid:
