@@ -1,5 +1,6 @@
 from components.BinanceDCABot import BinanceBot
 from components.CoinbaseDCABot import CoinbaseBot
+from components.TelegramBot import TelegramBot
 from dotenv import load_dotenv
 import argparse
 import os
@@ -22,12 +23,15 @@ if __name__ =="__main__":
         cb_secret_key = os.getenv('CB_SECRET_KEY')
         cb_passphrase = os.getenv('CB_PASSPHRASE')
         cb_bot = CoinbaseBot(args.amount, args.token, cb_api_key, cb_secret_key, cb_passphrase)
-        cb_bot.run()
+        result = cb_bot.run()
+        telebot = TelegramBot(os.getenv("TELEGRAM_API_KEY"))
+        telebot.send_message(result)
+        
     elif args.binance:
         binance_api_key = os.getenv("BINANCE_API_KEY")
         binance_secret_key = os.getenv("BINANCE_SECRET_KEY")
         bot = BinanceBot(args.amount, args.token, binance_api_key, binance_secret_key)
-        bot.run()
+        result = bot.run()
     else:
         print("Please add a --coinbase or --binance argument")
     
