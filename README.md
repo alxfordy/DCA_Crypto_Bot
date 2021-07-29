@@ -21,6 +21,8 @@ I've set this up in AWS Lambda and it runs once every 5 days, you can do the sam
 How to set it up on AWS Lamnda - https://alexford9296.medium.com/dollar-cost-averaging-bot-for-binance-and-coinbase-pro-6b9be7ca074b
 
 To Do -
-- [ ] Discord message when buy order created to see if it as successful or failed.
-- [ ] (optional) - Pull money from bank account
+- [X] Send message on telegram of the result of a trade
+- [ ] Telegram functionality needs sorting - productionise start, stop etc
+- [ ] Sort out persistent chat ID in telegram
+
 
