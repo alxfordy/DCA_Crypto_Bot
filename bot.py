@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import argparse
 import os
 import telebot
+from components.utils import daysLeftInMonth, calculateSplitFromDaysLeft
 
 
 
@@ -15,7 +16,7 @@ if __name__ =="__main__":
     parser.add_argument('--binance', action="store_true",
                         help='Use the binance DCA', required=False)
     parser.add_argument('--amount', action="store", help="The amount you would like to invest e.g 10.00", required=False)
-    parser.add_argument('--token', action="store", help="The token you wish to buy e.g ADA-GBP", required=False)
+    parser.add_argument('--tokens', action="store", help="The token you wish to buy e.g ADA-GBP, or a list e.g ADA-GBP, ETH-GBP", required=False)
     parser.add_argument('--findchatid', action="store_true", help="Flag to use to find your chat ID for your bot", required=False)
     parser.add_argument('--chatid', action="store", help="If set, this will cause the bot to send you a message depending on how the trade goes", required=False)
     load_dotenv()
@@ -31,8 +32,21 @@ if __name__ =="__main__":
         cb_api_key = os.getenv('CB_API_KEY')
         cb_secret_key = os.getenv('CB_SECRET_KEY')
         cb_passphrase = os.getenv('CB_PASSPHRASE')
-        cb_bot = CoinbaseBot(args.amount, args.token, cb_api_key, cb_secret_key, cb_passphrase)
-        result = cb_bot.run()
+        tokens = args.tokens.split(",")
+        if len(tokens) == 1:
+            # cb_bot = CoinbaseBot(args.token, cb_api_key, cb_secret_key, cb_passphrase, args.amount, auto=False)
+            cb_bot = CoinbaseBot(args.token, cb_api_key, cb_secret_key, cb_passphrase)
+            result = cb_bot.run()
+        if len(tokens) > 1:
+            cb_bot = CoinbaseBot(None, None, cb_api_key, cb_secret_key, cb_passphrase)
+            total = cb_bot.get_account_holdings_workaround("GBP")[0].get("balance")
+            amount_per_token = (calculateSplitFromDaysLeft(daysLeftInMonth(), len(tokens), total))
+            if amount_per_token < 5:
+                result = f"Insufficient Funds - Would be buying {amount_per_token} of each token"
+            else:
+                for token in tokens:
+                    cb_bot = CoinbaseBot(amount_per_token, token, cb_api_key, cb_secret_key, cb_passphrase)
+                    result = cb_bot.run()
         if args.chatid:
             telebot = TelegramBot(os.getenv("TELEGRAM_API_KEY"))
             telebot.send_message(result)

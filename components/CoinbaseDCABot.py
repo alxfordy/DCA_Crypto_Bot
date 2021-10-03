@@ -47,7 +47,7 @@ class CoinbaseBot():
     def _got_funds(self, asset=None):
         asset = asset if asset else "GBP"
         if not hasattr(self, 'balance'):
-            self.balance = self.self.get_account_holdings_workaround(asset)[0].get("balance")
+            self.balance = self.get_account_holdings_workaround(asset)[0].get("balance")
         if float(self.amount) > float(self.balance): return False 
         return True
 
@@ -59,7 +59,6 @@ class CoinbaseBot():
         # Something went wrong if there's a 'message' field in response
             print(result['message'])
         return result
-
 
     def run(self, **kwargs):
         asset = kwargs.get("asset") if kwargs.get("asset") else "GBP"
@@ -75,6 +74,8 @@ class CoinbaseBot():
             return f"Error - Not Enough Funds - Balance: {fiat_balance.get('available')} {fiat_balance.get('currency')} and want to buy {self.amount} {fiat_balance.get('currency')}"
         
         ticker_price_details = self.get_ticker_price()
-        self._logger.info(f"Buying {self.crypto_token} at {ticker_price_details.get('price')}")
-        return self.create_buy_order()
-        # return "Success"
+        self._logger.info(f"Buying {self.amount} of {self.crypto_token} at {ticker_price_details.get('price')}")
+        result = self.create_buy_order()
+        # self.log_order(result)
+        # return self.create_buy_order()
+        return "Success"
