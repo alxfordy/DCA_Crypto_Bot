@@ -41,7 +41,7 @@ if __name__ =="__main__":
         tokens = args.tokens.split(",")
         if len(tokens) == 1:
             # cb_bot = CoinbaseBot(args.token, cb_api_key, cb_secret_key, cb_passphrase, args.amount, auto=False)
-            cb_bot = CoinbaseBot(args.token, cb_api_key, cb_secret_key, cb_passphrase)
+            cb_bot = CoinbaseBot(args.token, args.amount, cb_api_key, cb_secret_key, cb_passphrase)
             result = cb_bot.run()
         if len(tokens) > 1:
             cb_bot = CoinbaseBot(None, None, cb_api_key, cb_secret_key, cb_passphrase)
@@ -51,7 +51,7 @@ if __name__ =="__main__":
                 result = f"Insufficient Funds - Would be buying {amount_per_token} of each token"
             else:
                 for token in tokens:
-                    cb_bot = CoinbaseBot(amount_per_token, token, cb_api_key, cb_secret_key, cb_passphrase)
+                    cb_bot = CoinbaseBot(token, amount_per_token, cb_api_key, cb_secret_key, cb_passphrase)
                     result = cb_bot.run()
         if args.chatid:
             telebot = TelegramBot(os.getenv("TELEGRAM_API_KEY"))
