@@ -2,3 +2,4 @@ python-binance
 cbpro
 python-dotenv
 pyTelegramBotAPI
+cryptocom

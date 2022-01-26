@@ -61,7 +61,7 @@ class BinanceBot():
     def _got_funds(self):
         if not hasattr(self, 'balance'):
             self.balance = self.get_balance().get("free")
-        if self.amount > self.balance:
+        if float(self.amount) > float(self.balance):
             return False 
         return True
 

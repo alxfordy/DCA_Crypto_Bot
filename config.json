@@ -1,0 +1,20 @@
+{
+    "pairs": [
+        {
+            "pair": "ETH_USD",
+            "exchange": "cryptodotcom",
+            "amount": 10
+        },
+        {
+            "pair": "ALGO-GBP",
+            "exchange": "coinbase",
+            "amount": 10
+        },
+        {
+            "pair": "BNBBTC",
+            "exchange": "binance",
+            "amount": 10
+        }
+    ],
+    "telegram_chat_id": 1921878784
+}

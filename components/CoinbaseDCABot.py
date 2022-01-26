@@ -2,16 +2,12 @@
 @author: Alex F
 '''
 
-import time
-import math
-import os
 import logging
-import json
 import cbpro
 
 class CoinbaseBot():
 
-    def __init__(self, amount, crypto_token, api_key, secret_key, passphrase):
+    def __init__(self, crypto_token, amount, api_key, secret_key, passphrase):
         """ Initialisation of the Bot with the DCA options """
         self._logger = logging.getLogger("Coinbase-DCA-Bot")
         logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
@@ -76,6 +72,6 @@ class CoinbaseBot():
         ticker_price_details = self.get_ticker_price()
         self._logger.info(f"Buying {self.amount} of {self.crypto_token} at {ticker_price_details.get('price')}")
         result = self.create_buy_order()
-        # self.log_order(result)
-        # return self.create_buy_order()
+        ## result looks like 
+        # return {'id': '6ea1e040-d8b5-4cb0-9f6e-94585dc13960', 'product_id': 'SOL-GBP', 'side': 'buy', 'stp': 'dc', 'funds': '9.950248', 'specified_funds': '10.00', 'type': 'market', 'post_only': False, 'created_at': '2021-08-03T17:36:26.13214Z', 'fill_fees': '0', 'filled_size': '0', 'executed_value': '0', 'status': 'pending', 'settled': False}
         return "Success"
